@@ -1,0 +1,451 @@
+/**
+ * Shared Card Game Styles
+ */
+
+/* Card Base */
+.cga-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 100px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    user-select: none;
+    position: relative;
+    font-family: 'Georgia', serif;
+}
+
+.cga-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.cga-card.selected {
+    transform: translateY(-15px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border-color: #4caf50;
+}
+
+.cga-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cga-card.disabled:hover {
+    transform: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.cga-card-back {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #1a237e 100%);
+    border-color: #0d1442;
+}
+
+.cga-card-back::after {
+    content: 'ðŸ‚ ';
+    font-size: 40px;
+    color: rgba(255,255,255,0.3);
+}
+
+/* Card Content */
+.cga-card-rank {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.cga-card-suit {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.cga-card-corner {
+    position: absolute;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.cga-card-corner-tl {
+    top: 4px;
+    left: 6px;
+}
+
+.cga-card-corner-br {
+    bottom: 4px;
+    right: 6px;
+    transform: rotate(180deg);
+}
+
+/* Suit Colors */
+.cga-card.hearts, .cga-card.diamonds {
+    color: #c62828;
+}
+
+.cga-card.clubs, .cga-card.spades {
+    color: #212121;
+}
+
+/* Suit Symbols */
+.suit-hearts::after { content: 'â™¥'; }
+.suit-diamonds::after { content: 'â™¦'; }
+.suit-clubs::after { content: 'â™£'; }
+.suit-spades::after { content: 'â™ '; }
+
+/* Card Hand */
+.cga-hand {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 15px;
+    min-height: 130px;
+    background: linear-gradient(to bottom, #1b5e20, #2e7d32);
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.cga-hand-fanned {
+    gap: 0;
+}
+
+.cga-hand-fanned .cga-card {
+    margin-left: -30px;
+}
+
+.cga-hand-fanned .cga-card:first-child {
+    margin-left: 0;
+}
+
+/* Trick/Play Area */
+.cga-play-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    padding: 20px;
+    background: #2e7d32;
+    border-radius: 10px;
+    margin: 15px 0;
+    position: relative;
+}
+
+.cga-trick {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cga-trick-card {
+    position: relative;
+}
+
+.cga-trick-card .cga-player-label {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: white;
+    white-space: nowrap;
+}
+
+/* Four Player Layout */
+.cga-table {
+    display: grid;
+    grid-template-areas:
+        ". top ."
+        "left center right"
+        ". bottom .";
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    min-height: 400px;
+    padding: 15px;
+    background: #1b5e20;
+    border-radius: 15px;
+}
+
+.cga-seat-top { grid-area: top; }
+.cga-seat-left { grid-area: left; align-self: center; }
+.cga-seat-right { grid-area: right; align-self: center; }
+.cga-seat-bottom { grid-area: bottom; }
+.cga-table-center { grid-area: center; }
+
+.cga-opponent-hand {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+}
+
+.cga-opponent-hand .cga-card {
+    width: 40px;
+    height: 58px;
+}
+
+.cga-opponent-hand.vertical {
+    flex-direction: column;
+}
+
+.cga-opponent-hand.vertical .cga-card {
+    margin-top: -40px;
+}
+
+.cga-opponent-hand.vertical .cga-card:first-child {
+    margin-top: 0;
+}
+
+/* Player Info */
+.cga-player-info {
+    text-align: center;
+    color: white;
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.cga-player-info.active {
+    background: rgba(255,193,7,0.5);
+    box-shadow: 0 0 10px rgba(255,193,7,0.5);
+}
+
+.cga-player-info .name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cga-player-info .name .ai-badge {
+    display: inline-block;
+    background: #2196F3;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cga-player-info .score {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* Bidding UI */
+.cga-bid-area {
+    background: rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.cga-bid-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.cga-bid-btn {
+    padding: 8px 16px;
+    background: #1565c0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cga-bid-btn:hover {
+    background: #0d47a1;
+}
+
+.cga-bid-btn.pass {
+    background: #757575;
+}
+
+.cga-bid-btn.pass:hover {
+    background: #616161;
+}
+
+/* Trump Indicator */
+.cga-trump-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cga-trump-indicator.hearts,
+.cga-trump-indicator.diamonds {
+    color: #c62828;
+}
+
+.cga-trump-indicator.clubs,
+.cga-trump-indicator.spades {
+    color: #212121;
+}
+
+/* Score Display */
+.cga-scoreboard {
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+}
+
+.cga-scoreboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cga-scoreboard th,
+.cga-scoreboard td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.cga-scoreboard th {
+    font-weight: bold;
+    color: #ffc107;
+}
+
+/* Team Colors */
+.cga-team-0 {
+    border-left: 3px solid #2196f3;
+}
+
+.cga-team-1 {
+    border-left: 3px solid #ff9800;
+}
+
+/* Cribbage Board */
+.cga-cribbage-board {
+    background: linear-gradient(to right, #8d6e63, #6d4c41);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.cga-peg-track {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    padding: 10px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.cga-peg-hole {
+    width: 12px;
+    height: 12px;
+    background: #3e2723;
+    border-radius: 50%;
+    border: 1px solid #5d4037;
+}
+
+.cga-peg-hole.filled-0 {
+    background: #2196f3;
+    box-shadow: 0 0 5px #2196f3;
+}
+
+.cga-peg-hole.filled-1 {
+    background: #f44336;
+    box-shadow: 0 0 5px #f44336;
+}
+
+/* Messages */
+.cga-game-message {
+    text-align: center;
+    padding: 10px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 5px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.cga-game-message.warning {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.cga-game-message.info {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+/* Meld Display (Pinochle) */
+.cga-meld-display {
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.cga-meld-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    color: white;
+    font-size: 13px;
+}
+
+.cga-meld-item .points {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .cga-card {
+        width: 50px;
+        height: 72px;
+    }
+    
+    .cga-card-rank {
+        font-size: 14px;
+    }
+    
+    .cga-card-suit {
+        font-size: 20px;
+    }
+    
+    .cga-hand-fanned .cga-card {
+        margin-left: -25px;
+    }
+    
+    .cga-table {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "top"
+            "left"
+            "center"
+            "right"
+            "bottom";
+    }
+    
+    .cga-opponent-hand.vertical {
+        flex-direction: row;
+    }
+    
+    .cga-opponent-hand.vertical .cga-card {
+        margin-top: 0;
+        margin-left: -25px;
+    }
+}
